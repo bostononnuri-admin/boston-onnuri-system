@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko" style="background:#1c3254;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>보스턴 온누리교회</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    background: #1c3254 !important;
+    color-scheme: light !important;
+    forced-color-adjust: none !important;
+    height: 100%;
+  }
+
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    background-color: #1c3254 !important;
+    background-image:
+      linear-gradient(rgba(245,244,241,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,244,241,0.05) 1px, transparent 1px) !important;
+    background-size: 40px 40px !important;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1.25rem;
+    -webkit-font-smoothing: antialiased;
+    forced-color-adjust: none;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── 로고 ── */
+  .logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    object-fit: cover;
+    margin-bottom: 1.4rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  /* ── 타이틀 ── */
+  .title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.03em;
+    text-align: center;
+    margin-bottom: 0.3rem;
+  }
+  .subtitle {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.04em;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  /* ── 2×2 그리드 ── */
+  .grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── 카드 ── */
+  .card {
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: 16px;
+    padding: 1.5rem 1.25rem 1.3rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.22s cubic-bezier(.16,1,.3,1),
+                background 0.22s ease,
+                border-color 0.22s ease,
+                box-shadow 0.22s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .card:hover {
+    background: #f5f2eb;
+    border-color: #e8e3d8;
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+  }
+
+  /* 클릭 시 눌리는 효과 */
+  .card:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease;
+    background: rgba(255,255,255,0.28);
+  }
+
+  .card:active::after {
+    opacity: 1;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4.5px;
+    background: linear-gradient(90deg, #b8892e, #d4aa5a);
+    border-radius: 16px 16px 0 0;
+    opacity: 0;
+    transition: opacity 0.22s ease;
+  }
+  .card:hover::after { opacity: 1; }
+
+  .card-num {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: #b8892e;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    transition: color 0.22s ease;
+  }
+  .card:hover .card-num { color: #8a6420; }
+
+  .card-title {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+    margin-bottom: auto;
+    padding-bottom: 1.1rem;
+    transition: color 0.22s ease;
+    word-break: keep-all;
+  }
+  .card:hover .card-title { color: #1a2e4a; }
+
+  .card-arrow {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5rem;
+    transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+  }
+  .card-arrow svg {
+    width: 11px;
+    height: 11px;
+    stroke: rgba(255,255,255,0.6);
+    stroke-width: 2;
+    fill: none;
+    transition: stroke 0.22s ease;
+  }
+  .card:hover .card-arrow {
+    background: #b8892e;
+    border-color: #b8892e;
+    transform: translateX(2px);
+  }
+  .card:hover .card-arrow svg { stroke: #fff; }
+
+  /* ── 타임스탬프 ── */
+  .timestamp {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── 전환 오버레이 ── */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: #1c3254;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
+    transition: opacity 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* ── 페이드업 애니메이션 ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .logo      { animation: fadeUp 0.5s ease both; }
+  .title     { animation: fadeUp 0.5s 0.06s ease both; }
+  .subtitle  { animation: fadeUp 0.5s 0.10s ease both; }
+  .card:nth-child(1) { animation: fadeUp 0.5s 0.14s ease both; }
+  .card:nth-child(2) { animation: fadeUp 0.5s 0.19s ease both; }
+  .card:nth-child(3) { animation: fadeUp 0.5s 0.24s ease both; }
+  .card:nth-child(4) { animation: fadeUp 0.5s 0.29s ease both; }
+  .timestamp { animation: fadeUp 0.5s 0.34s ease both; }
+
+  /* ── 모바일 ── */
+  @media (max-width: 360px) {
+    .card { padding: 1.2rem 1rem 1.1rem; }
+    .card-title { font-size: 0.88rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 전환 오버레이 -->
+<div class="overlay" id="overlay"></div>
+
+<div class="wrap">
+
+  <img src="logo.jpg" alt="보스턴 온누리교회" class="logo">
+
+  <h1 class="title">보스턴 온누리교회</h1>
+  <p class="subtitle">사역 지원 시스템</p>
+
+  <div class="grid">
+
+    <a class="card" href="https://bostononnuri-admin.github.io/church-report/">
+      <div class="card-num">01</div>
+      <div class="card-title">예배<br>인원계수</div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 11 11"><polyline points="3,2 8,5.5 3,9"/></svg>
+      </div>
+    </a>
+
+    <a class="card" href="https://boston-onuri-reservation.vercel.app/">
+      <div class="card-num">02</div>
+      <div class="card-title">장소<br>예약</div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 11 11"><polyline points="3,2 8,5.5 3,9"/></svg>
+      </div>
+    </a>
+
+    <a class="card" href="https://script.google.com/a/macros/bostononnuri.org/s/AKfycbyIISoIDlVfUTDMJilmEBAPjZ6XAm6p56Z6UeTpo6Q4PfP0L4SKrgyPAaI-8bU5G51njg/exec">
+      <div class="card-num">03</div>
+      <div class="card-title">행정·재정<br>시스템</div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 11 11"><polyline points="3,2 8,5.5 3,9"/></svg>
+      </div>
+    </a>
+
+    <a class="card" href="https://boston-onnuri-signup.vercel.app/">
+      <div class="card-num">04</div>
+      <div class="card-title">행사 신청서<br>플랫폼</div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 11 11"><polyline points="3,2 8,5.5 3,9"/></svg>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="timestamp" id="ts"></div>
+
+</div>
+
+<script>
+  // 타임스탬프
+  function updateTime() {
+    const now = new Date();
+    const pad = n => String(n).padStart(2,'0');
+    document.getElementById('ts').textContent =
+      `${now.getFullYear()}/${pad(now.getMonth()+1)}/${pad(now.getDate())}, ` +
+      `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())} (EDT)`;
+  }
+  updateTime();
+  setInterval(updateTime, 1000);
+
+  // 페이드 전환
+  const overlay = document.getElementById('overlay');
+
+  // 페이지 진입 시 페이드인 (다른 페이지에서 돌아왔을 때도 자연스럽게)
+  window.addEventListener('pageshow', () => {
+    overlay.classList.remove('active');
+  });
+
+  // 카드 클릭 시 페이드아웃 후 이동
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      e.preventDefault();
+      const url = this.href;
+      overlay.classList.add('active');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 420);
+    });
+  });
+</script>
+
+</body>
+</html>
