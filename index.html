@@ -75,7 +75,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 4rem;
   }
 
   /* ── 카드 ── */
@@ -194,6 +194,21 @@
     letter-spacing: 0.06em;
     font-variant-numeric: tabular-nums;
   }
+  .timestamp .guide-link {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    font: inherit;
+    letter-spacing: inherit;
+  }
+  .timestamp .guide-link:hover {
+    color: #b8892e;
+  }
+  .timestamp .sep {
+    color: rgba(255,255,255,0.3);
+    margin: 0 0.5rem;
+  }
 
   /* ── 전환 오버레이 ── */
   .overlay {
@@ -279,7 +294,11 @@
 
   </div>
 
-  <div class="timestamp" id="ts" aria-label="현재 시각"></div>
+  <div class="timestamp" aria-label="현재 시각">
+    <span id="ts"></span>
+    <span class="sep">·</span>
+    <a class="guide-link" href="#" id="guideLink" role="button" aria-label="사용자 가이드 열기">사용자 가이드</a>
+  </div>
 
 </div>
 
@@ -313,6 +332,18 @@
         window.location.href = url;
       }, 420);
     });
+  });
+
+  // 사용자 가이드 링크 (가이드 준비 후 URL 설정 예정)
+  // ── 가이드 준비 완료 시 아래 GUIDE_URL 만 실제 주소로 바꾸면 됩니다 ──
+  const GUIDE_URL = ''; // 예: 'https://manual.bostononnuri.org'
+  document.getElementById('guideLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    if (GUIDE_URL) {
+      window.open(GUIDE_URL, '_blank', 'noopener');
+    } else {
+      alert('사용자 가이드는 준비 중입니다.');
+    }
   });
 </script>
 
